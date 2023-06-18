@@ -11,28 +11,28 @@ class BBox:
 
     0------------------------------------------------------------------------------------------------> x
     |                                   BBox
-    |    (x_top_left, y_top_left)  o_____________________
+    |             (x_left, y_top)  o_____________________
     |                              |                    |
     |                              |     some text      |
     |                              |____________________o
-    |                                                   (x_bottom_right, y_bottom_right)
+    |                                                   (x_right, y_bottom)
     |
     |
     |
     |
     V y
     """
-    def __init__(self, x_top_left: int, y_top_left: int, width: int, height: int) -> None:
+    def __init__(self, x_left: int, y_top: int, width: int, height: int) -> None:
         """
         The following parameters should have values of pixels number.
 
-        :param x_top_left: x coordinate of the bbox top left corner
-        :param y_top_left: y coordinate of the bbox top left corner
+        :param x_left: x coordinate of the bbox top left corner
+        :param y_top: y coordinate of the bbox top left corner
         :param width: bounding box width
         :param height: bounding box height
         """
-        self.x_left = x_top_left
-        self.y_top = y_top_left
+        self.x_left = x_left
+        self.y_top = y_top
         self.width = width
         self.height = height
 
@@ -67,8 +67,8 @@ class BBox:
         """
         x_top_left, y_top_left = top_left
         x_bottom_right, y_bottom_right = bottom_right
-        return BBox(x_top_left=x_top_left,
-                    y_top_left=y_top_left,
+        return BBox(x_left=x_top_left,
+                    y_top=y_top_left,
                     width=x_bottom_right - x_top_left,
                     height=y_bottom_right - y_top_left)
 

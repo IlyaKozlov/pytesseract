@@ -51,4 +51,4 @@ class OcrElement:
 
     @property
     def bbox(self) -> BBox:
-        return BBox(x_top_left=self.left, y_top_left=self.top, width=self.width, height=self.height)
+        return BBox(x_left=self.left, y_top=self.top, width=self.width, height=self.height)
