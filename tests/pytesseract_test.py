@@ -19,6 +19,7 @@ from pytesseract import image_to_data
 from pytesseract import image_to_osd
 from pytesseract import image_to_pdf_or_hocr
 from pytesseract import image_to_string
+from pytesseract import image_to_ocr_page
 from pytesseract import Output
 from pytesseract import TesseractNotFoundError
 from pytesseract import TSVNotSupported
@@ -98,6 +99,16 @@ def test_file_small():
         # 'bmp',
     ],
 )
+
+def test_image_to_page(test_file):
+    # Don't perform assertion against full string in case the version
+    # of tesseract installed doesn't catch it all. This test is testing
+    # that pytesseract command line program is called correctly.
+    if test_file.endswith('gif') and TESSERACT_VERSION[0] < 4:
+        pytest.skip('skip gif test')
+    test_file_path = path.join(DATA_DIR, test_file)
+    assert 'The quick brown dog' in image_to_ocr_page(test_file_path, 'eng').text()
+
 def test_image_to_string_with_image_type(test_file):
     # Don't perform assertion against full string in case the version
     # of tesseract installed doesn't catch it all. This test is testing

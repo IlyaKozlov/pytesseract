@@ -27,6 +27,7 @@ from packaging.version import parse
 from packaging.version import Version
 from PIL import Image
 
+from .ocr_page import OcrPage
 
 tesseract_cmd = 'tesseract'
 
@@ -409,6 +410,10 @@ def get_tesseract_version():
 
     return version
 
+def image_to_ocr_page(image, lang=None, config='', nice=0, timeout=0):
+    data = image_to_data(image=image, lang=lang, config=config, nice=nice, timeout=timeout, output_type=Output.DICT)
+    page = OcrPage.from_dict(data)
+    return page
 
 def image_to_string(
     image,
